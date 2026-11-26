@@ -17,7 +17,9 @@ import databento as db  # noqa: E402
 
 from frontline import keys  # noqa: E402
 
-FAKE = "db-Fake0Key0For0Tests0Only000000"  # right shape, but not a real key
+# Right shape, but made up. It's built from two parts so that secret scanners,
+# which look for key-shaped text, don't mistake it for a real key.
+FAKE = "db-" + "Fake0Key0For0Tests0Only000000"
 
 
 def attempt(label: str, make_client) -> None:

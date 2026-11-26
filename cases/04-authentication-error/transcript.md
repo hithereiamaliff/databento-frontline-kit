@@ -1,6 +1,6 @@
 # Transcript: authentication error
 
-Recorded 2026-11-26 04:11 UTC with databento 0.90.0, pandas 3.1.1 and Python 3.13.7 on Windows 11. Produced by `python cases/record.py`; nothing here was edited by hand.
+Recorded 2026-11-26 04:34 UTC with databento 0.90.0, pandas 3.1.1 and Python 3.13.7 on Windows 11. Produced by `python cases/record.py`; nothing here was edited by hand.
 
 `python cases/04-authentication-error/run.py` (exit code 0)
 

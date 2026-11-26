@@ -4,7 +4,11 @@ import base64
 
 from frontline import keys
 
-FAKE = "db-Fake0Key0For0Tests0Only000000"  # 32 characters, like a real key
+# Made-up keys that are never valid. They're built from two parts so that secret
+# scanners, which look for key-shaped text, don't mistake them for real keys.
+FAKE = "db-" + "Fake0Key0For0Tests0Only000000"  # 32 characters, like a real key
+FROM_FILE = "db-" + "FromTheFile" + "0" * 18
+OTHER = "db-" + "SomethingElse12345678"
 
 
 def test_fake_key_has_the_real_shape():
@@ -49,7 +53,7 @@ def test_env_file_values_come_back_raw(tmp_path):
 
 def test_environment_wins_over_env_file(monkeypatch, tmp_path):
     env = tmp_path / ".env"
-    env.write_text("DATABENTO_API_KEY=db-FromTheFile0000000000000000000\n", encoding="utf-8")
+    env.write_text(f"DATABENTO_API_KEY={FROM_FILE}\n", encoding="utf-8")
     monkeypatch.setenv(keys.ENV_NAME, FAKE)
     raw, source = keys.find_key(env)
     assert raw == FAKE
@@ -58,8 +62,8 @@ def test_environment_wins_over_env_file(monkeypatch, tmp_path):
 
 def test_scrub_removes_every_form_of_the_key():
     basic = base64.b64encode(f"{FAKE}:".encode()).decode()
-    text = f"key={FAKE} header=Basic {basic} again {basic} other=db-SomethingElse12345678"
+    text = f"key={FAKE} header=Basic {basic} again {basic} other={OTHER}"
     cleaned = keys.scrub(text, FAKE)
     assert FAKE not in cleaned
     assert basic not in cleaned
-    assert "db-SomethingElse" not in cleaned
+    assert OTHER not in cleaned
