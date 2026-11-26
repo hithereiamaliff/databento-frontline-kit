@@ -1,0 +1,13 @@
+# Secrets: the API key lives here and must never be committed
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Data downloaded while running the cases
+*.dbn
+*.dbn.zst
+data/

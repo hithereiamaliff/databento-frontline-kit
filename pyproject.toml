@@ -1,0 +1,10 @@
+[project]
+name = "databento-frontline-kit"
+version = "0.1.0"
+description = "Frontline support tools and worked cases for Databento's Python client"
+requires-python = ">=3.11"
+dependencies = ["databento==0.90.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
